@@ -1,0 +1,16 @@
+{{isError}}
+
+<hr>
+
+{{input value=firstName}}
+{{x-errors errors=errors.firstName}}
+<br>
+{{input value=age}}
+{{x-errors errors=errors.age}}
+<br>
+{{input value=profile}}
+{{x-errors errors=errors.profile}}
+
+<br>
+
+<button {{action 'v'}} style="font-size: 24px;">VALIDATE!</button>

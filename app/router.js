@@ -3,6 +3,8 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.resource('other');
+  this.resource('apitest', { path: '/' });
 });
 
 export default Router;

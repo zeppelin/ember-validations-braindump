@@ -5,7 +5,14 @@ export default Ember.ObjectController.extend(Validations, {
     // PROPOSAL
     firstName: {
       presence: true,
-      length: { minimum: 5 }
+      length: {
+        minimum: 5,
+        if: function(object, property) {
+          return object.validate('firstName.presence').then(function() {
+            return object.validate('firstName.lofaszValidator');
+          });
+        }
+      }
     },
     age: {
       numericality: true,
