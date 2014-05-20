@@ -12,6 +12,7 @@
     "loader": "stefanpenner/loader.js#1.0.0",
     "ember-cli-shims": "stefanpenner/ember-cli-shims#0.0.1",
     "ember-load-initializers": "stefanpenner/ember-load-initializers#0.0.1",
-    "ember-validations": "https://raw.githubusercontent.com/zeppelin/builds/master/ember-validations/ember-validations.js"
+    "ember-validations": "https://raw.githubusercontent.com/zeppelin/builds/master/ember-validations/ember-validations.js",
+    "ember-validation": "https://raw.githubusercontent.com/Dani723/builds/master/ember-validation/ember-validation.js"
   }
 }
