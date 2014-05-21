@@ -1,10 +1,3 @@
-import ValidatorService from 'appkit/services/validator';
+import initializer from 'appkit/packages/validations/initializer';
 
-export default {
-  name: 'validators',
-
-  initialize: function(container, application) {
-    container.register('service:validator', ValidatorService);
-    application.inject('controller', 'validator', 'service:validator');
-  }
-};
+export default initializer;

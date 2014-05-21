@@ -1,4 +1,4 @@
-import ValidationsMixin from 'appkit/mixins/validations';
+import ValidationsMixin from 'appkit/packages/validations/mixin';
 
 var ApitestController = Ember.ObjectController.extend(ValidationsMixin, {
   validations: {

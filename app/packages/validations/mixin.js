@@ -1,4 +1,4 @@
-import { keysToArray } from 'appkit/utils/object';
+import { keysToArray } from './utils';
 
 var isBlank = Ember.isBlank,
     get = Ember.get, set = Ember.set;

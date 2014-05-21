@@ -5,6 +5,7 @@ Ember.MODEL_FACTORY_INJECTIONS = true;
 
 var App = Ember.Application.extend({
   modulePrefix: 'appkit', // TODO: loaded via config
+  podModulePrefix: 'appkit/packages',
   Resolver: Resolver
 });
 
