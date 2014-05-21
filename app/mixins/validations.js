@@ -54,6 +54,8 @@ export default Ember.Mixin.create({
             value = entry.reason,
             propertyName = value.name;
 
+            // console.log(propertyName);
+
         // Clear the error for the property name if the entry is fulfilled
         if (state === 'fulfilled') {
           set(errors, propertyName, null);
