@@ -50,19 +50,17 @@ export default Ember.Mixin.create({
 
       entries.forEach(function(entry) {
         var state = entry.state,
-            value = entry.reason,
-            propertyName = value.name;
-
-            // console.log(propertyName);
+            reason;
 
         // Clear the error for the property name if the entry is fulfilled
         if (state === 'fulfilled') {
-          set(errors, propertyName, null);
+          set(errors, entry.value.propertyName, null);
           return;
         }
 
         // Set the error for that property name if not
-        set(errors, propertyName, value.errors);
+        reason = entry.reason;
+        set(errors, reason.propertyName, reason.errors);
       });
     });
   }

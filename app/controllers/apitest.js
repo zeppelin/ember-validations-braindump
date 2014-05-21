@@ -6,7 +6,7 @@ var ApitestController = Ember.ObjectController.extend(ValidationsMixin, {
       presence: true,
       length: { minimum: 5 }
     },
-    lastName: true,
+    // lastName: true,
     age: {
       numericality: true
     }
@@ -16,11 +16,7 @@ var ApitestController = Ember.ObjectController.extend(ValidationsMixin, {
     validate: function() {
       this.validate();
     }
-  },
-
-  validateAge: function() {
-    this.validator.validate(['age']);
-  }.observes('age')
+  }
 });
 
 export default ApitestController;

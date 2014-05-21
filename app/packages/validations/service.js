@@ -3,7 +3,7 @@ var RSVP = Ember.RSVP;
 export default Ember.Object.extend({
   /*
 
-  Example fields are:
+  Example properties are:
 
   {
     propertyName: 'firstName',
@@ -14,24 +14,64 @@ export default Ember.Object.extend({
     }
   }
   */
-  validate: function(fields) {
-    var promises = fields.map(function(field) {
-      for (var validation_type in field.validations) {
-        var validation_options = field.validations[validation_type],
-            propertyName = field.propertyName;
+  validate: function(properties) {
+    var promises;
 
-        console.log('Running ' + validation_type + ' validation on ' + propertyName + ' with options: ' + validation_options);
-      }
+    promises = properties.map(function(property) {
+      var propertyName, validatorPromises;
 
-      return new RSVP.reject({
-        name: field.propertyName,
-        errors: [
-          'egy error',
-          'megegy error'
-        ]
-      });
+      propertyName = property.propertyName;
+      validatorPromises = promisesForValidators(property);
+
+      return promiseForField(property, validatorPromises);
     });
 
-    return RSVP.allSettled(promises);
+    return RSVP.allSettled(promises, 'Validator: validate properties');
   }
 });
+
+
+function promisesForValidators(property) {
+  var propertyName = property.propertyName,
+      validations = Ember.keys(property.validations);
+
+  return validations.map(function(validationType) {
+    var validationOptions = property.validations[validationType];
+
+    console.log('Running ' + validationType + ' validation on ' + propertyName + ' with options: ' + validationOptions);
+    return new RSVP.reject('lekoplek, gecc: ' + validationType, 'Validator: running validator: ' + validationType + ' on ' + propertyName);
+    // return RSVP.resolve();
+    // lookup validator, `return validator.validate()` instead of the above, which returns a promise
+  });
+}
+
+function promiseForField(property, validatorPromises) {
+  var propertyName = property.propertyName;
+
+  return new RSVP.Promise(function(resolve, reject) {
+    RSVP.allSettled(validatorPromises, 'Validator: waiting for validators to finish for property: ' + propertyName).then(function(validatorResults) {
+      var errors = errorsFromValidationResults(validatorResults);
+
+      var retValue = {
+        propertyName: propertyName
+      }
+
+      if (Ember.isBlank(errors)) {
+        resolve(retValue);
+      } else {
+        retValue.errors = errors;
+        reject(retValue);
+      }
+    });
+  }, 'Validator: validate property: ' + propertyName);
+}
+
+function errorsFromValidationResults(results) {
+  return results.filter(function(entry) {
+    if (entry.state === 'rejected') {
+      return true;
+    }
+  }).map(function(entry) {
+    return entry.reason;
+  });
+}
