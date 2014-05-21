@@ -1,5 +1,3 @@
-import { keysToArray } from './utils';
-
 var isBlank = Ember.isBlank,
     get = Ember.get, set = Ember.set;
 
@@ -31,7 +29,7 @@ export default Ember.Mixin.create({
 
     // Collect all property names that are on the `validations` hash
     if (isBlank(propertyNames)) {
-      propertyNames = keysToArray(validations);
+      propertyNames = Ember.keys(validations);
     }
 
     // Turn them into a specific format, as we'll need to
