@@ -9,7 +9,7 @@ var ApitestRoute = Ember.Route.extend({
       username: 'janipapa',
       password: null,
       passwordConfirmation: null
-    }
+    };
   }
 });
 

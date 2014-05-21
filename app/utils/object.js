@@ -11,4 +11,4 @@ function keysToArray(object) {
 
 export {
   keysToArray
-}
+};
