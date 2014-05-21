@@ -39,8 +39,9 @@ export default Ember.Mixin.create({
     //    2. reference back to the property name
     fields = propertyNames.map(function(propertyName) {
       return {
-        name: propertyName,
-        value: get(self, propertyName)
+        propertyName: propertyName,
+        propertyValue: get(self, propertyName),
+        validations: validations[propertyName]
       };
     });
 
