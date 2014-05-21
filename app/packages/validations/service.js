@@ -1,3 +1,5 @@
+import PresenceValidator from './validators/presence';
+
 var RSVP = Ember.RSVP;
 
 export default Ember.Object.extend({
@@ -33,13 +35,18 @@ export default Ember.Object.extend({
 
 function promisesForValidators(property) {
   var propertyName = property.propertyName,
+      propertyValue = property.propertyValue,
       validations = Ember.keys(property.validations);
 
   return validations.map(function(validationType) {
     var validationOptions = property.validations[validationType];
 
     console.log('Running ' + validationType + ' validation on ' + propertyName + ' with options: ' + validationOptions);
-    return new RSVP.reject('lekoplek, gecc: ' + validationType, 'Validator: running validator: ' + validationType + ' on ' + propertyName);
+
+    if (validationType === 'presence') {
+      return PresenceValidator.create().call(propertyValue);
+    }
+    return RSVP.reject('lekoplek, gecc: ' + validationType, 'Validator: running validator: ' + validationType + ' on ' + propertyName);
     // return RSVP.resolve();
     // lookup validator, `return validator.validate()` instead of the above, which returns a promise
   });
