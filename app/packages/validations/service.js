@@ -1,4 +1,4 @@
-import PresenceValidator from './validators/presence';
+import { PresenceValidator } from './validators';
 
 var RSVP = Ember.RSVP;
 
