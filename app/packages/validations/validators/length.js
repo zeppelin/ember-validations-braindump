@@ -21,9 +21,9 @@ export default BaseValidator.extend({
     }
 
     if (Ember.isBlank(errors)) {
-      return Ember.RSVP.reject(errors.join(', '));
-    } else {
       return Ember.RSVP.resolve();
+    } else {
+      return Ember.RSVP.reject(errors.join(', '));
     }
   }
 });
