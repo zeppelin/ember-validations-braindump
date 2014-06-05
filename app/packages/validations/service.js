@@ -61,7 +61,7 @@ function promiseForField(property, validatorPromises) {
 
       var retValue = {
         propertyName: propertyName
-      }
+      };
 
       if (Ember.isBlank(errors)) {
         resolve(retValue);
