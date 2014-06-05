@@ -41,11 +41,15 @@ function promisesForValidators(property) {
   return validations.map(function(validationType) {
     var validationOptions = property.validations[validationType];
 
-    console.log('Running ' + validationType + ' validation on ' + propertyName + ' with options: ' + validationOptions);
-
-    if (validationType === 'presence') {
-      return PresenceValidator.create().call(propertyValue);
+    switch(validationType) {
+      case 'presence':
+        return PresenceValidator.create().call(propertyValue);
+      case 'length':
+        return LengthValidator.create().call(propertyValue, validationOptions);
+      default:
+        console.log('no idea how to run the following validator:' + validationType);
     }
+    
     return RSVP.reject('lekoplek, gecc: ' + validationType, 'Validator: running validator: ' + validationType + ' on ' + propertyName);
     // return RSVP.resolve();
     // lookup validator, `return validator.validate()` instead of the above, which returns a promise
